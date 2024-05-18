@@ -1,21 +1,17 @@
-import tweepy
-from config.config import API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
+''' This script is used to tweet the flight details of the user. '''
+from authenticator import get_twitter_conn_v1, get_twitter_conn_v2
+from tweet_formatter import format_tweet
 from data.fetch_flight_data import fetch_flight_data
 
-client = tweepy.Client(consumer_key=API_KEY, consumer_secret=API_SECRET,
-    access_token=ACCESS_TOKEN, access_token_secret=ACCESS_TOKEN_SECRET)
+client_v1 = get_twitter_conn_v1()
+client_v2 = get_twitter_conn_v2()
 
-def format_tweet(detail_data):
-    flight_number = detail_data["identification"]["number"]["default"]
-    departure_airport = detail_data["airport"]["origin"]["name"]
-    arrival_airport = detail_data["airport"]["destination"]["name"]
-    scheduled_departure_time = detail_data["time"]["scheduled"]["departure"]
-    scheduled_arrival_time = detail_data["time"]["scheduled"]["arrival"]
+#add code for remove previous image and download new image and set to media_path
+def tweet():
+    ''' This function tweets the flight details of the user. '''
+    media_path = r"image.jpg"
+    media = client_v1.media_upload(filename=media_path)
+    media_id = media.media_id
 
-    return f"Flight {flight_number} from {departure_airport} to {arrival_airport} is scheduled to depart at {scheduled_departure_time} and arrive at {scheduled_arrival_time}."
-
-def tweet_flights():
     detail_data = fetch_flight_data()
-    tweet = client.create_tweet(
-    text=format_tweet(detail_data)
-)
+    client_v2.create_tweet(text=format_tweet(detail_data), media_ids=[media_id])
