@@ -1,3 +1,4 @@
+''' This file contains the configuration for the application. '''
 API_KEY = ''
 API_SECRET = ''
 ACCESS_TOKEN = ''
