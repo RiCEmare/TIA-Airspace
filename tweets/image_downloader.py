@@ -19,3 +19,4 @@ def download_image(url):
     response = http.request('GET', modified_url)
     with open("image.jpg", 'wb') as file:
         file.write(response.data)
+    return r"image.jpg"
