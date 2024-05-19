@@ -12,10 +12,13 @@ def urltweaker(url):
     modified_url = "/".join(parts)
     return modified_url
 
-def download_image(url):
+def download_image(url, aircraft=True):
     ''' This function downloads the image from the given url and saves it to the given location. '''
     http = urllib3.PoolManager()
-    modified_url = urltweaker(url)
+    if aircraft:
+        modified_url = urltweaker(url)
+    else:
+        modified_url = url
     response = http.request('GET', modified_url)
     with open("image.jpg", 'wb') as file:
         file.write(response.data)
