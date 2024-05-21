@@ -20,6 +20,6 @@ def download_image(url, aircraft=True):
     else:
         modified_url = url
     response = http.request('GET', modified_url)
-    with open("image.jpg", 'wb') as file:
+    with open("/tmp/image.jpg", 'wb') as file:
         file.write(response.data)
-    return r"image.jpg"
+    return r"/tmp/image.jpg"
