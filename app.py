@@ -1,5 +1,5 @@
 ''' This is the main file that will be executed to run the application. '''
-from utils.scheduler import schedule_tweets
+from tweets.tweet_flights import tweet
 
-if __name__ == "__main__":
-    schedule_tweets()
+def lambda_handler(event, lambda_context):
+    tweet()
