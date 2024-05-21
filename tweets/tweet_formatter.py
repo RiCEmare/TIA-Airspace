@@ -41,19 +41,23 @@ def format_tweet(detail_data):
 
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel('gemini-pro')
-    prompt = f"""
-    Create a tweet for a bot which posts info of a random flight.
-    Flight Number: {flight_number}
-    Airline: {airline_name}
-    Origin: {origin_name}
-    Destination: {destination_name}
-    Status: {status_text}
-    Scheduled Departure Time: {scheduled_departure_time}
-    Scheduled Arrival Time: {scheduled_arrival_time}
-    Real Departure Time: {real_departure_time}
-    Real Arrival Time: {real_arrival_time}
-    Estimated Arrival Time: {estimated_arrival_time}
-    The tweet should be informative, fun, and under 280 characters. Create sentences. No hashtags or links. Include flag emojis of the origin and destination countries. No further updates. 
-    """
-    response = model.generate_content(prompt)
+    while True:
+        prompt = f"""
+        Create a tweet for a bot which posts info of a different flight each time.
+        following are flight details of a randomly selected flight.
+        Flight Number: {flight_number}
+        Airline: {airline_name}
+        Origin: {origin_name}
+        Destination: {destination_name}
+        Status: {status_text}
+        Scheduled Departure Time: {scheduled_departure_time}
+        Scheduled Arrival Time: {scheduled_arrival_time}
+        Real Departure Time: {real_departure_time}
+        Real Arrival Time: {real_arrival_time}
+        Estimated Arrival Time: {estimated_arrival_time}
+        The tweet should be informative, fun, and under 275 characters. Create sentences. No hashtags or links. Include flag emojis of the origin and destination countries. No further updates. 
+        """
+        response = model.generate_content(prompt)
+        if len(response.text)<=280:
+            break
     return response.text
