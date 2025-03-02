@@ -2,4 +2,4 @@ tweepy
 requests
 urllib3
 schedule
-google-generativeai
+google-genai
