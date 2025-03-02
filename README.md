@@ -10,7 +10,7 @@ The motivation behind creating this project was to develop a fun Twitter bot rel
 The Twitter bot selects flight details using the Flight Radar API, which allows it to search for aircraft around a specific area using the `flights/list-in-boundary` request. This ensures that the posted flight details are relevant to the Tribhuvan International Airport airspace. The `flights/details` request provides detailed information about the flight.
 
 ## Tweet Scheduler
-The python code is executed using AWS Lambda. The code is stored in AWS S3 bucket. The lambda fuction is triggered every 3 hour using CloudWatch.
+The Python code is executed using AWS Lambda. The code is stored in the AWS S3 bucket. The lambda function is triggered every 3 hours using EventBridge.
 
 ## Information Included in Each Post
 Each post about a flight includes information such as:
