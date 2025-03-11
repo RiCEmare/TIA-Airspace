@@ -10,8 +10,8 @@ client_v2 = get_twitter_conn_v2()
 
 def tweet():
     ''' This function tweets the flight details of the user. '''
-    if fetch_flight_data() != -1:
-        detail_data = fetch_flight_data()
+    detail_data = fetch_flight_data()
+    if detail_data != -1:
         tweet_text = format_tweet(detail_data)
     else:
         if random.random() < 0.5:  # 50% chance of creating cat post
